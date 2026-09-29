@@ -1,0 +1,46 @@
+:root {
+    /*رنگ اصلی*/
+    --primary: #CCCCCC;
+    --primary-hover: #075CD9;
+    --on-primary: #FFFFFF;
+
+    /*رنگ زمینه و سطح*/
+    --background: #FFFFFF;
+    --on-background: #191C1E;
+    --surface: #FFFFFF;
+    --border: #E9E9E9;
+    --muted: #727272;
+
+    /*رنگ‌های خنثی*/
+    --neutral-50: #FFFFFF; /*روشن‌ترین (سفید)*/
+    --neutral-100: #FEFEFE;
+    --neutral-200: #F5F6F8;
+    --neutral-300: #E1E0E5;
+    --neutral-400: #E1E0E5;
+    --neutral-500: #C8C7CB; /*وسط*/
+    --neutral-600: #AFAEB2;
+    --neutral-700: #7D7D7F;
+    --neutral-800: #646466;
+    --neutral-900: #323233;
+    --neutral-950: #000000; /*تیره‌ترین (مشکی)*/
+
+    --Errors: #E63946;
+    --Success: #90F677;
+}
+
+.dark {
+    /*رنگ اصلی*/
+    --primary: #3A86F8;
+    --primary-hover: #6BA4FA;
+    --on-primary: #FFFFFF;
+
+    /*رنگ زمینه و سطح*/
+    --background: #060C18;
+    --on-background: #E6E9EF;
+    --surface: #091120;
+    --border: #3D3D3D;
+    --muted: #848890;
+
+    /*رنگ‌های خنثی*/
+    --neutral-950: #FFFFFF;
+}

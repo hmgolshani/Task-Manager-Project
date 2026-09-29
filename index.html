@@ -4,15 +4,41 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Task Manager</title>
+
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
+
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="./tokens.css" />
   <script src="./vendor/tailwind.js"></script>
   <script>
     tailwind.config = {
       darkMode: "class",
       theme: {
-        extend: {},
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            "primary-hover": "var(--primary-hover)",
+            "on-primary": "var(--on-primary)",
+            background: "var(--background)",
+            "on-background": "var(--on-background)",
+            surface: "var(--surface)",
+            border: "var(--border)",
+            muted: "var(--muted)",
+            errors: "var(--Errors)",
+            success: "var(--Success)",
+          },
+          fontFamily: {
+            sans: ["Yekan Bakh", "system-ui", "sans-serif"],
+          },
+        },
       },
     };
   </script>
+
   <script src="./js/storage.js" defer></script>
   <script src="./js/ui.js" defer></script>
   <script src="./js/create.js" defer></script>
