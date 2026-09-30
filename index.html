@@ -47,7 +47,7 @@
     <script src="./js/state.js" defer></script>
     <script src="./js/main.js" defer></script>
   </head>
-  <body>
+ <body>
     <header
       id="app-header"
       class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-64 lg:rounded-t-xl lg:border lg:border-b-0 lg:border-border lg:bg-surface"
@@ -59,8 +59,6 @@
         class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
         data-region="mobile-app-bar"
       >
-        <span class="w-6" aria-hidden="true"></span>
-        <h1 id="app-title" class="text-sm font-bold">کوئرا لیست</h1>
         <button
           id="sidebar-toggle"
           type="button"
@@ -83,6 +81,8 @@
             <path d="M5 7h14M5 12h14M5 17h14" />
           </svg>
         </button>
+        <h1 id="app-title" class="text-sm font-bold">کوئرا لیست</h1>
+        <span class="w-6" aria-hidden="true"></span>
       </div>
 
       <div
@@ -90,34 +90,21 @@
         class="flex min-h-24 items-center gap-3 border-b border-border px-5 py-4 lg:min-h-28 lg:border-b-0"
         data-region="user-summary"
       >
-        <div
+        <img
           id="user-avatar"
-          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-muted"
-          role="img"
-          aria-label="تصویر پروفایل "
-          data-avatar="fallback"
-        >
-          <svg
-            class="h-6 w-6"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="8" r="3.2" />
-            <path d="M5.5 19c.8-3.3 3.1-5 6.5-5s5.7 1.7 6.5 5" />
-          </svg>
-        </div>
+          src="./assets/img/user-avatar.png"
+          alt="تصویر پروفایل رویا"
+          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover"
+          data-avatar="image"
+        />
 
         <div class="min-w-0 flex-1">
           <p
             id="user-greeting"
             class="truncate text-sm font-bold"
-            data-user-name="سلام"
+            data-user-name="رویا"
           >
-            سلام،
-          </p>
+            سلام، رویا</p>
           <p
             id="today-label"
             class="mt-1 truncate text-xs text-muted"
@@ -324,6 +311,7 @@
         >
           <svg
             class="h-5 w-5 shrink-0 text-muted"
+            gg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -344,6 +332,59 @@
         class="mt-auto px-3 pb-4"
         data-region="sidebar-footer"
       >
+        <div
+          id="theme-switcher"
+          class="mb-3 flex items-center gap-1 rounded-lg border border-border bg-background p-1"
+          data-region="theme-switcher"
+          data-theme-control="true"
+        >
+          <button
+            id="theme-light"
+            type="button"
+            class="flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm text-on-background transition hover:bg-primary-hover/10"
+            data-action="set-theme"
+            data-theme="light"
+            aria-label="حالت روشن"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <span>روشن</span>
+          </button>
+
+          <button
+            id="theme-dark"
+            type="button"
+            class="flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm text-muted transition hover:bg-primary-hover/10"
+            data-action="set-theme"
+            data-theme="dark"
+            aria-label="حالت تاریک"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z" />
+            </svg>
+            <span>تاریک</span>
+          </button>
+        </div>
         <button
           id="logout-button"
           type="button"
