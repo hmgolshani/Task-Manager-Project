@@ -1,53 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Task Manager</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task Manager</title>
 
-  <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  </script>
+    <script>
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
 
-  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-  <link rel="stylesheet" href="./tokens.css" />
-  <script src="./vendor/tailwind.js"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: "var(--primary)",
-            "primary-hover": "var(--primary-hover)",
-            "on-primary": "var(--on-primary)",
-            background: "var(--background)",
-            "on-background": "var(--on-background)",
-            surface: "var(--surface)",
-            border: "var(--border)",
-            muted: "var(--muted)",
-            errors: "var(--Errors)",
-            success: "var(--Success)",
-          },
-          fontFamily: {
-            sans: ["Yekan Bakh", "system-ui", "sans-serif"],
+    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./tokens.css" />
+    <script src="./vendor/tailwind.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "var(--primary)",
+              "primary-hover": "var(--primary-hover)",
+              "on-primary": "var(--on-primary)",
+              background: "var(--background)",
+              "on-background": "var(--on-background)",
+              surface: "var(--surface)",
+              border: "var(--border)",
+              muted: "var(--muted)",
+              errors: "var(--Errors)",
+              success: "var(--Success)",
+            },
+            fontFamily: {
+              sans: ["Yekan Bakh", "system-ui", "sans-serif"],
+            },
           },
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <script src="./js/storage.js" defer></script>
-  <script src="./js/ui.js" defer></script>
-  <script src="./js/create.js" defer></script>
-  <script src="./js/render.js" defer></script>
-  <script src="./js/edit.js" defer></script>
-  <script src="./js/state.js" defer></script>
-  <script src="./js/main.js" defer></script>
-</head>
-<body>
+    <script src="./js/storage.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/create.js" defer></script>
+    <script src="./js/render.js" defer></script>
+    <script src="./js/edit.js" defer></script>
+    <script src="./js/state.js" defer></script>
+    <script src="./js/main.js" defer></script>
+  </head>
+  <body>
+    <header
+      id="app-header"
+      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-64 lg:rounded-t-xl lg:border lg:border-b-0 lg:border-border lg:bg-surface"
+      data-component="app-header"
+      data-mobile="true"
+    >
+      <div
+        id="mobile-app-bar"
+        class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
+        data-region="mobile-app-bar"
+      >
+        <span class="w-6" aria-hidden="true"></span>
+        <h1 id="app-title" class="text-sm font-bold">کوئرا لیست</h1>
+        <button
+          id="sidebar-toggle"
+          type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-on-background transition hover:bg-primary-hover/10 focus:outline-none focus:ring-2 focus:ring-primary-hover"
+          aria-label="باز کردن منوی کناری"
+          aria-controls="app-sidebar"
+          aria-expanded="false"
+          data-action="toggle-sidebar"
+          data-open="false"
+        >
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 7h14M5 12h14M5 17h14" />
+          </svg>
+        </button>
+      </div>
 
-</body>
+      <div
+        id="user-summary"
+        class="flex min-h-24 items-center gap-3 border-b border-border px-5 py-4 lg:min-h-28 lg:border-b-0"
+        data-region="user-summary"
+      >
+        <div
+          id="user-avatar"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-muted"
+          role="img"
+          aria-label="تصویر پروفایل "
+          data-avatar="fallback"
+        >
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="8" r="3.2" />
+            <path d="M5.5 19c.8-3.3 3.1-5 6.5-5s5.7 1.7 6.5 5" />
+          </svg>
+        </div>
+
+        <div class="min-w-0 flex-1">
+          <p
+            id="user-greeting"
+            class="truncate text-sm font-bold"
+            data-user-name="سلام"
+          >
+            سلام،
+          </p>
+          <p
+            id="today-label"
+            class="mt-1 truncate text-xs text-muted"
+            data-date-source="js"
+          >
+            امروز چهارشنبه، ۸ مهر ۱۴۰۵
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <aside
+      id="app-sidebar"
+      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-200 data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-64 lg:translate-x-0 lg:rounded-b-xl lg:border lg:border-t-0 lg:shadow-none"
+      aria-label="منوی اصلی"
+      data-component="sidebar"
+      data-open="false"
+      data-mode="responsive"
+    >
+      <div
+        id="sidebar-mobile-head"
+        class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
+        data-region="sidebar-mobile-head"
+      >
+        <button
+          id="sidebar-close"
+          type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-on-background transition hover:bg-primary-hover/10 focus:outline-none focus:ring-2 focus:ring-primary-hover"
+          aria-label="بستن منوی کناری"
+          data-action="close-sidebar"
+        >
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="m7 7 10 10M17 7 7 17" />
+          </svg>
+        </button>
+        <p class="text-sm font-bold">کوئرا لیست</p>
+        <span class="w-9" aria-hidden="true"></span>
+      </div>
+
+      <nav
+        id="primary-nav"
+        class="px-3 pt-4"
+        aria-label="ناوبری اصلی"
+        data-region="primary-nav"
+      >
+        <a
+          id="nav-home"
+          href="#"
+          class="flex h-11 items-center gap-3 rounded-lg bg-primary-hover/10 px-3 text-sm font-semibold text-primary-hover"
+          aria-current="page"
+          data-nav="home"
+          data-active="true"
+        >
+          <svg
+            class="h-5 w-5 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"
+            />
+          </svg>
+          <span>خانه</span>
+        </a>
+
+        <a
+          id="nav-tasks"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="tasks"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <path d="M8 9h8M8 13h5" />
+          </svg>
+          <span>تسک‌ها</span>
+        </a>
+
+        <a
+          id="nav-calendar"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="calendar"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="5" width="16" height="15" rx="3" />
+            <path d="M8 3v4M16 3v4M4 10h16" />
+          </svg>
+          <span>تقویم</span>
+        </a>
+
+        <a
+          id="nav-reports"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="reports"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="4" width="16" height="16" rx="3" />
+            <path d="M8 16v-3M12 16V8M16 16v-6" />
+          </svg>
+          <span>گزارشات</span>
+        </a>
+
+        <a
+          id="nav-settings"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="settings"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5l-.3 3.1a7 7 0 0 0-1.7 1l-2.4-1-2 3.4L5.1 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.3 3.1h5l.3-3.1a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.5c.1-.3.1-.7.1-1Z"
+            />
+          </svg>
+          <span>تنظیمات</span>
+        </a>
+
+        <a
+          id="nav-support"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="support"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M6 18h-1a2 2 0 0 1-2-2v-4a9 9 0 0 1 18 0v4a2 2 0 0 1-2 2h-1"
+            />
+            <path d="M7 14v4M17 14v4M9 20h6" />
+          </svg>
+          <span>پشتیبانی</span>
+        </a>
+
+        <a
+          id="nav-profile"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="profile"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="8" r="3" />
+            <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
+          </svg>
+          <span>پروفایل</span>
+        </a>
+      </nav>
+
+      <div
+        id="sidebar-footer"
+        class="mt-auto px-3 pb-4"
+        data-region="sidebar-footer"
+      >
+        <button
+          id="logout-button"
+          type="button"
+          class="flex h-11 w-full items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-action="logout"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M14 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3"
+            />
+            <path d="M10 12h11M18 9l3 3-3 3" />
+          </svg>
+          <span>خروج</span>
+        </button>
+      </div>
+    </aside>
+  </body>
 </html>
