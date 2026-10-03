@@ -26,6 +26,27 @@
 
     --Errors: #E63946;
     --Success: #90F677;
+
+    /*رنگ اولویت‌ها*/
+    --priority-high: #FF5F37;
+    --priority-medium: #FFAF37;
+    --priority-low: #11A483;
+    --priority-high-bg: #FFE2DB;
+    --priority-medium-bg: #FFEFD6;
+    --priority-low-bg: #C3FFF1;
+
+    /*کنترل‌ها*/
+    --dash-line: #AFAEB2;
+    --checkbox-border: #CCCCCC;
+    --checkbox-bg: #FFFFFF;
+    --checkbox-check: #FFFFFF;
+    --btn-secondary: #E5E5E5;
+    --btn-secondary-hover: #D4D4D4;
+    --icon: #5C5F61;
+
+    /*حالت خالی*/
+    --empty-title: #7D7D7F;
+    --empty-text: #AFAEB2;
 }
 
 .dark {
@@ -43,4 +64,25 @@
 
     /*رنگ‌های خنثی*/
     --neutral-950: #FFFFFF;
+
+    /*رنگ اولویت‌ها*/
+    --priority-high: #FF5F37;
+    --priority-medium: #FFAF37;
+    --priority-low: #02E1A2;
+    --priority-high-bg: #3D2327;
+    --priority-medium-bg: #302F2D;
+    --priority-low-bg: #233332;
+
+    /*کنترل‌ها*/
+    --dash-line: #203E62;
+    --checkbox-border: #CCCCCC;
+    --checkbox-bg: #007BFF;
+    --checkbox-check: #091120;
+    --btn-secondary: #E5E5E5;
+    --btn-secondary-hover: #D4D4D4;
+    --icon: #FFFFFF;
+
+    /*حالت خالی*/
+    --empty-title: #848890;
+    --empty-text: #52555B;
 }
