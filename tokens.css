@@ -1,8 +1,12 @@
 :root {
-    /*رنگ اصلی*/
+    /*رنگ اصلی (اسم‌ها از UI Kit)*/
     --primary: #CCCCCC;
     --primary-hover: #075CD9;
     --on-primary: #FFFFFF;
+
+    /*آبی صفحه‌ها*/
+    --accent: #007BFF; /*متن «افزودن وظیفه جدید»*/
+    --btn-primary: #007BFF; /*دکمه اضافه کردن و ویرایش تسک*/
 
     /*رنگ زمینه و سطح*/
     --background: #FFFFFF;
@@ -24,15 +28,50 @@
     --neutral-900: #323233;
     --neutral-950: #000000; /*تیره‌ترین (مشکی)*/
 
-    --Errors: #E63946;
-    --Success: #90F677;
+    --error: #E63946;
+    --success: #90F677;
+
+    /*کارت تسک*/
+    --task-title: #242424;
+    --task-menu: #525252; /*سه نقطه*/
+    --done-title: #323233; /*اسم تسک انجام‌شده*/
+    --actions-bg: #FFFFFF; /*جعبه آیکون ویرایش و حذف*/
+    --actions-border: #EBEDEF;
+
+    /*رنگ اولویت‌ها (بدون پسوند = نوار کنار کارت)*/
+    --priority-high: #FF5F37;
+    --priority-medium: #FFAF37;
+    --priority-low: #11A483;
+    --priority-high-text: #FF5F37;
+    --priority-medium-text: #FFAF37;
+    --priority-low-text: #11A483;
+    --priority-high-bg: #FFE2DB;
+    --priority-medium-bg: #FFEFD6;
+    --priority-low-bg: #C3FFF1;
+
+    /*کنترل‌ها*/
+    --dash-line: #CCCCCC;
+    --checkbox-border: #CCCCCC;
+    --checkbox-checked: #007BFF; /*پس‌زمینه چک‌باکس تیک‌خورده*/
+    --checkbox-check: #FFFFFF; /*رنگ تیک*/
+    --btn-secondary: #E5E5E5;
+    --btn-secondary-hover: #D4D4D4;
+    --icon: #5C5F61;
+
+    /*حالت خالی*/
+    --empty-title: #7D7D7F;
+    --empty-text: #AFAEB2;
 }
 
 .dark {
-    /*رنگ اصلی*/
+    /*رنگ اصلی (اسم‌ها از UI Kit)*/
     --primary: #3A86F8;
     --primary-hover: #6BA4FA;
     --on-primary: #FFFFFF;
+
+    /*آبی صفحه‌ها*/
+    --accent: #57A8FF;
+    --btn-primary: #002247;
 
     /*رنگ زمینه و سطح*/
     --background: #060C18;
@@ -43,4 +82,35 @@
 
     /*رنگ‌های خنثی*/
     --neutral-950: #FFFFFF;
+
+    /*کارت تسک*/
+    --task-title: #FFFFFF;
+    --task-menu: #FFFFFF;
+    --done-title: #FFFFFF;
+    --actions-bg: #0B192D;
+    --actions-border: #293242;
+
+    /*رنگ اولویت‌ها*/
+    --priority-high: #FF5F37;
+    --priority-medium: #FFAF37;
+    --priority-low: #11A483;
+    --priority-high-text: #FF5F37;
+    --priority-medium-text: #FFAF37;
+    --priority-low-text: #02E1A2;
+    --priority-high-bg: #3D2327;
+    --priority-medium-bg: #302F2D;
+    --priority-low-bg: #233332;
+
+    /*کنترل‌ها*/
+    --dash-line: #203E62;
+    --checkbox-border: #CCCCCC;
+    --checkbox-checked: #007BFF;
+    --checkbox-check: #091120;
+    --btn-secondary: #E5E5E5;
+    --btn-secondary-hover: #D4D4D4;
+    --icon: #FFFFFF;
+
+    /*حالت خالی*/
+    --empty-title: #848890;
+    --empty-text: #52555B;
 }
