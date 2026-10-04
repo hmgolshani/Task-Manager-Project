@@ -1,53 +1,615 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Task Manager</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task Manager</title>
 
-  <script>
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  </script>
+    <link rel="stylesheet" href="./assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./tokens.css" />
+    <script src="./vendor/tailwind.js"></script>
+    <script>
+      const token = (name) =>
+        `color-mix(in srgb, var(--${name}) calc(<alpha-value> * 100%), transparent)`;
 
-  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
-  <link rel="stylesheet" href="./tokens.css" />
-  <script src="./vendor/tailwind.js"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: "var(--primary)",
-            "primary-hover": "var(--primary-hover)",
-            "on-primary": "var(--on-primary)",
-            background: "var(--background)",
-            "on-background": "var(--on-background)",
-            surface: "var(--surface)",
-            border: "var(--border)",
-            muted: "var(--muted)",
-            errors: "var(--Errors)",
-            success: "var(--Success)",
-          },
-          fontFamily: {
-            sans: ["Yekan Bakh", "system-ui", "sans-serif"],
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: token("primary"),
+              "primary-hover": token("primary-hover"),
+              "on-primary": token("on-primary"),
+              accent: token("accent"),
+              "btn-primary": token("btn-primary"),
+              "btn-secondary": token("btn-secondary"),
+              "btn-secondary-hover": token("btn-secondary-hover"),
+              background: token("background"),
+              "on-background": token("on-background"),
+              surface: token("surface"),
+              border: token("border"),
+              muted: token("muted"),
+              "task-title": token("task-title"),
+              "task-menu": token("task-menu"),
+              "done-title": token("done-title"),
+              "actions-bg": token("actions-bg"),
+              "actions-border": token("actions-border"),
+              "dash-line": token("dash-line"),
+              "checkbox-border": token("checkbox-border"),
+              "checkbox-checked": token("checkbox-checked"),
+              "checkbox-check": token("checkbox-check"),
+              "empty-title": token("empty-title"),
+              "empty-text": token("empty-text"),
+              icon: token("icon"),
+              neutral: {
+                50: token("neutral-50"),
+                100: token("neutral-100"),
+                200: token("neutral-200"),
+                300: token("neutral-300"),
+                400: token("neutral-400"),
+                500: token("neutral-500"),
+                600: token("neutral-600"),
+                700: token("neutral-700"),
+                800: token("neutral-800"),
+                900: token("neutral-900"),
+                950: token("neutral-950"),
+              },
+              error: token("error"),
+              success: token("success"),
+            },
+            fontFamily: {
+              sans: ["Yekan Bakh", "system-ui", "sans-serif"],
+            },
           },
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <script src="./js/storage.js" defer></script>
-  <script src="./js/ui.js" defer></script>
-  <script src="./js/create.js" defer></script>
-  <script src="./js/render.js" defer></script>
-  <script src="./js/edit.js" defer></script>
-  <script src="./js/state.js" defer></script>
-  <script src="./js/main.js" defer></script>
-</head>
-<body>
+    <script src="./js/storage.js" defer></script>
+    <script src="./js/ui.js" defer></script>
+    <script src="./js/create.js" defer></script>
+    <script src="./js/render.js" defer></script>
+    <script src="./js/edit.js" defer></script>
+    <script src="./js/state.js" defer></script>
+    <script src="./js/main.js" defer></script>
+  </head>
+  <body class="min-h-screen bg-background font-sans text-on-background antialiased">
+    <header
+      id="app-header"
+      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-64 lg:rounded-t-xl lg:border lg:border-b-0 lg:border-border lg:bg-surface"
+      data-component="app-header"
+      data-mobile="true"
+    >
+      <div
+        id="mobile-app-bar"
+        class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
+        data-region="mobile-app-bar"
+      >
+        <button
+          id="sidebar-toggle"
+          type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-on-background transition hover:bg-primary-hover/10 focus:outline-none focus:ring-2 focus:ring-primary-hover"
+          aria-label="باز کردن منوی کناری"
+          aria-controls="app-sidebar"
+          aria-expanded="false"
+          data-action="toggle-sidebar"
+          data-open="false"
+        >
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 7h14M5 12h14M5 17h14" />
+          </svg>
+        </button>
+        <h1 id="app-title" class="text-sm font-bold">کوئرا لیست</h1>
+        <span class="w-6" aria-hidden="true"></span>
+      </div>
 
-</body>
+      <div
+        id="user-summary"
+        class="flex min-h-24 items-center gap-3 border-b border-border px-5 py-4 lg:min-h-28 lg:border-b-0"
+        data-region="user-summary"
+      >
+        <div
+          id="user-avatar"
+          role="img"
+          aria-label="تصویر پروفایل رویا"
+          class="h-11 w-11 shrink-0 rounded-full border border-border bg-[url('./assets/img/user-avatar.png')] bg-cover bg-center"
+          data-avatar="image"
+        ></div>
+
+        <div class="min-w-0 flex-1">
+          <p
+            id="user-greeting"
+            class="truncate text-sm font-bold"
+            data-user-name="رویا"
+          >
+            سلام، رویا</p>
+          <p
+            id="today-label"
+            class="mt-1 truncate text-xs text-muted"
+            data-date-source="js"
+          >
+            امروز چهارشنبه، ۸ مهر ۱۴۰۵
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <aside
+      id="app-sidebar"
+      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-200 data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-64 lg:translate-x-0 lg:rounded-b-xl lg:border lg:border-t-0 lg:shadow-none"
+      aria-label="منوی اصلی"
+      data-component="sidebar"
+      data-open="false"
+      data-mode="responsive"
+    >
+      <div
+        id="sidebar-mobile-head"
+        class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
+        data-region="sidebar-mobile-head"
+      >
+        <button
+          id="sidebar-close"
+          type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-on-background transition hover:bg-primary-hover/10 focus:outline-none focus:ring-2 focus:ring-primary-hover"
+          aria-label="بستن منوی کناری"
+          data-action="close-sidebar"
+        >
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="m7 7 10 10M17 7 7 17" />
+          </svg>
+        </button>
+        <p class="text-sm font-bold">کوئرا لیست</p>
+        <span class="w-9" aria-hidden="true"></span>
+      </div>
+
+      <nav
+        id="primary-nav"
+        class="px-3 pt-4"
+        aria-label="ناوبری اصلی"
+        data-region="primary-nav"
+      >
+        <a
+          id="nav-home"
+          href="#"
+          class="flex h-11 items-center gap-3 rounded-lg bg-primary-hover/10 px-3 text-sm font-semibold text-primary-hover"
+          aria-current="page"
+          data-nav="home"
+          data-active="true"
+        >
+          <svg
+            class="h-5 w-5 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"
+            />
+          </svg>
+          <span>خانه</span>
+        </a>
+
+        <a
+          id="nav-tasks"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="tasks"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="4" width="16" height="16" rx="4" />
+            <path d="M8 9h8M8 13h5" />
+          </svg>
+          <span>تسک‌ها</span>
+        </a>
+
+        <a
+          id="nav-calendar"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="calendar"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="5" width="16" height="15" rx="3" />
+            <path d="M8 3v4M16 3v4M4 10h16" />
+          </svg>
+          <span>تقویم</span>
+        </a>
+
+        <a
+          id="nav-reports"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="reports"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="4" width="16" height="16" rx="3" />
+            <path d="M8 16v-3M12 16V8M16 16v-6" />
+          </svg>
+          <span>گزارشات</span>
+        </a>
+
+        <a
+          id="nav-settings"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="settings"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a7 7 0 0 0-1.7-1L14.5 3h-5l-.3 3.1a7 7 0 0 0-1.7 1l-2.4-1-2 3.4L5.1 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.3 3.1h5l.3-3.1a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.5c.1-.3.1-.7.1-1Z"
+            />
+          </svg>
+          <span>تنظیمات</span>
+        </a>
+
+        <a
+          id="nav-support"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="support"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M6 18h-1a2 2 0 0 1-2-2v-4a9 9 0 0 1 18 0v4a2 2 0 0 1-2 2h-1"
+            />
+            <path d="M7 14v4M17 14v4M9 20h6" />
+          </svg>
+          <span>پشتیبانی</span>
+        </a>
+
+        <a
+          id="nav-profile"
+          href="#"
+          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-nav="profile"
+          data-active="false"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            gg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="8" r="3" />
+            <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
+          </svg>
+          <span>پروفایل</span>
+        </a>
+      </nav>
+
+      <div
+        id="sidebar-footer"
+        class="mt-auto px-3 pb-4"
+        data-region="sidebar-footer"
+      >
+        <div
+          id="theme-switcher"
+          class="mb-3 flex items-center gap-1 rounded-lg border border-border bg-background p-1"
+          data-region="theme-switcher"
+          data-theme-control="true"
+        >
+          <button
+            id="theme-light"
+            type="button"
+            class="flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm text-on-background transition hover:bg-primary-hover/10"
+            data-action="set-theme"
+            data-theme="light"
+            aria-label="حالت روشن"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <span>روشن</span>
+          </button>
+
+          <button
+            id="theme-dark"
+            type="button"
+            class="flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm text-muted transition hover:bg-primary-hover/10"
+            data-action="set-theme"
+            data-theme="dark"
+            aria-label="حالت تاریک"
+          >
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z" />
+            </svg>
+            <span>تاریک</span>
+          </button>
+        </div>
+        <button
+          id="logout-button"
+          type="button"
+          class="flex h-11 w-full items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          data-action="logout"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-muted"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M14 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3"
+            />
+            <path d="M10 12h11M18 9l3 3-3 3" />
+          </svg>
+          <span>خروج</span>
+        </button>
+      </div>
+    </aside>
+
+    <main id="task-main" class="min-h-screen bg-background px-4 pb-10 pt-44 text-on-background sm:px-6 lg:mr-[292px] lg:px-5 lg:pt-[100px]" data-component="task-main">
+      <div class="mx-auto w-full max-w-[744px]">
+        <header id="task-page-heading" class="mb-6 text-right" data-region="task-heading">
+          <h2 class="text-base font-extrabold leading-none">تسک‌های امروز</h2>
+          <p class="mt-2 text-xs leading-none text-muted"><span id="task-count" data-task-count="incomplete">۱</span> تسک را باید انجام دهید.</p>
+        </header>
+
+        <section id="task-create-region" class="mb-6" data-region="task-create">
+          <button id="create-task-toggle" type="button" class="flex min-h-[57px] w-full items-center justify-start gap-2 rounded-[10px] border border-dashed border-dash-line px-4 py-4 text-sm font-semibold text-accent transition hover:bg-accent/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-controls="create-task-form" aria-expanded="false" data-action="toggle-create-task" data-open="false">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+            <span>افزودن وظیفه جدید</span>
+          </button>
+
+          <form id="create-task-form" class="rounded-xl border border-border bg-surface shadow-sm" aria-label="ساخت تسک جدید" data-component="task-form" data-form-mode="create" data-open="false" hidden>
+            <div class="space-y-3 p-4 sm:p-5">
+              <label class="sr-only" for="task-title">نام تسک</label>
+              <input id="task-title" name="title" type="text" required class="w-full border-0 bg-transparent p-0 text-sm font-semibold leading-none text-on-background placeholder:text-muted focus:outline-none focus:ring-0" placeholder="نام تسک" data-field="title" />
+              <label class="sr-only" for="task-description">توضیحات</label>
+              <textarea id="task-description" name="description" rows="1" class="w-full resize-none border-0 bg-transparent p-0 text-xs leading-none text-on-background placeholder:text-muted focus:outline-none focus:ring-0" placeholder="توضیحات" data-field="description"></textarea>
+              <div class="inline-flex w-fit flex-nowrap items-center rounded-md border border-border bg-surface p-0.5" data-region="priority-options" data-priority-group>
+                <button id="priority-high" type="button" class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=high]:text-[var(--priority-high-text)] data-[selected=true]:bg-[var(--priority-high-bg)]" aria-pressed="false" data-action="select-priority" data-priority="high" data-selected="false">بالا</button>
+                <span class="px-1 text-border" aria-hidden="true">|</span>
+                <button id="priority-medium" type="button" class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=medium]:text-[var(--priority-medium-text)] data-[selected=true]:bg-[var(--priority-medium-bg)]" aria-pressed="false" data-action="select-priority" data-priority="medium" data-selected="false">متوسط</button>
+                <span class="px-1 text-border" aria-hidden="true">|</span>
+                <button id="priority-low" type="button" class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=low]:text-[var(--priority-low-text)] data-[selected=true]:bg-[var(--priority-low-bg)]" aria-pressed="false" data-action="select-priority" data-priority="low" data-selected="false">پایین</button>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 border-t border-border px-4 py-2 sm:px-5">
+              <button id="create-task-cancel" type="button" class="flex h-8 w-8 items-center justify-center rounded-md bg-btn-secondary text-icon transition hover:bg-btn-secondary-hover focus:outline-none focus:ring-2 focus:ring-accent" aria-label="بستن فرم ساخت تسک" data-action="close-create-task"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+              <button id="create-task-submit" type="submit" class="rounded-lg bg-btn-primary px-4 py-2 text-xs font-semibold text-on-primary transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2" data-action="create-task">اضافه کردن تسک</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="task-empty-state" class="mb-8 flex flex-col items-center rounded-xl px-4 py-8 text-center sm:py-10" aria-label="وضعیت خالی تسک‌ها" data-component="empty-state" data-visible="false" hidden>
+          <div class="h-[232px] w-[283px] max-w-full bg-[url('./assets/img/noTasks.svg')] bg-contain bg-center bg-no-repeat" aria-hidden="true"></div>
+          <div class="mt-4 flex h-[51px] w-[371px] max-w-full flex-col items-center gap-1" data-region="empty-state-copy">
+            <h3 class="flex h-[25px] w-[225px] items-center text-right text-base font-extrabold leading-none text-empty-title" data-state-title>چه کارهایی امروز برای انجام داری؟</h3>
+            <p class="flex h-[22px] w-full items-center text-right text-sm font-semibold leading-none text-empty-text" data-state-description>میتونی الان تسک‌هاتو اینجا بنویسی و برنامه ریزی رو شروع کنی!</p>
+          </div>
+        </section>
+
+        <section id="incomplete-tasks" class="mb-8" aria-label="تسک‌های انجام‌نشده" data-region="incomplete-tasks" data-empty="false">
+          <div id="task-list" class="space-y-4 lg:space-y-6" data-task-list="incomplete">
+            <article class="group relative min-h-[105px] overflow-hidden rounded-xl border border-border bg-surface shadow-sm" data-task-card data-ui-preview="task-card" data-task-id="preview-task" data-done="false" data-priority="high">
+              <span class="absolute right-0 top-1/2 h-[78px] w-1 -translate-y-1/2 rounded-l-lg bg-border group-data-[priority=high]:bg-[var(--priority-high)] group-data-[priority=medium]:bg-[var(--priority-medium)] group-data-[priority=low]:bg-[var(--priority-low)]" aria-hidden="true" data-priority-stripe></span>
+              <div class="flex min-h-[105px] items-start gap-3 px-4 py-4 sm:pl-6 sm:pr-5">
+                <span class="relative mt-1 inline-flex h-4 w-4 shrink-0">
+                  <input type="checkbox" class="peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded border border-checkbox-border bg-surface checked:border-checkbox-checked checked:bg-checkbox-checked focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="علامت‌گذاری تسک به‌عنوان انجام‌شده" data-action="toggle-task-completion" data-done="false" />
+                  <svg class="pointer-events-none absolute inset-0 m-auto h-2 w-2 text-checkbox-check opacity-0 peer-checked:opacity-100" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 6 2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+                <div class="min-w-0 flex-1 text-right">
+                  <div class="flex flex-nowrap items-center gap-2">
+                    <h3 class="min-w-0 flex-1 truncate text-base font-bold leading-none text-task-title" data-field="title">نام تسک</h3>
+                    <span class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=high]:text-[var(--priority-high-text)] data-[priority=medium]:text-[var(--priority-medium-text)] data-[priority=low]:text-[var(--priority-low-text)] data-[priority=high]:bg-[var(--priority-high-bg)] data-[priority=medium]:bg-[var(--priority-medium-bg)] data-[priority=low]:bg-[var(--priority-low-bg)]" data-priority-label="high" data-priority="high">بالا</span>
+                  </div>
+                  <p class="mt-[14px] text-xs font-normal leading-[1] text-muted" data-field="description">توضیحات تسک</p>
+                </div>
+                <button type="button" class="flex h-6 w-6 shrink-0 items-center justify-center rounded text-task-menu" aria-label="عملیات تسک" aria-haspopup="menu" aria-expanded="false" data-action="open-task-menu"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="20" r="2" /></svg></button>
+              </div>
+              <div class="absolute bottom-3 left-4 top-auto flex translate-y-0 items-center rounded-md border border-actions-border bg-actions-bg p-0.5" role="group" aria-label="عملیات تسک" data-region="task-actions" data-state="selected">
+                <button type="button" class="flex h-6 w-6 items-center justify-center rounded text-icon hover:bg-background" aria-label="ویرایش تسک" data-action="open-edit-task"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7H6C4.9 7 4 7.9 4 9V18C4 19.1 4.9 20 6 20H15C16.1 20 17 19.1 17 18V17"/><path d="M16 5L19 8M20.385 6.585A2.1 2.1 0 0 0 17.415 3.615L9 12V15H12L20.385 6.585Z"/></svg></button>
+                <span class="h-5 border-l border-border" aria-hidden="true"></span>
+                <button type="button" class="flex h-6 w-6 items-center justify-center rounded text-icon hover:bg-background" aria-label="حذف تسک" aria-haspopup="dialog" aria-controls="delete-confirmation-dialog" data-action="open-delete-action"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7H20M5 7L6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19L19 7M9 7V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V7M10 12L14 16M14 12L10 16"/></svg></button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="edit-task-region" class="mb-8 rounded-xl border border-border bg-surface shadow-sm" aria-label="ویرایش تسک" data-region="edit-task" data-open="false" hidden>
+          <form id="edit-task-form" aria-label="ویرایش تسک" data-component="task-edit-card" data-form-mode="edit" data-ui-state="editing">
+            <div class="space-y-3 p-4 sm:p-5">
+              <label class="sr-only" for="edit-task-title">نام تسک</label>
+              <input id="edit-task-title" name="title" type="text" required class="w-full border-0 bg-transparent p-0 text-base font-bold leading-none text-on-background placeholder:text-muted focus:outline-none focus:ring-0" placeholder="نام تسک" data-field="title" />
+              <label class="sr-only" for="edit-task-description">توضیحات</label>
+              <textarea id="edit-task-description" name="description" rows="2" class="w-full resize-none border-0 bg-transparent p-0 text-xs leading-[1] text-muted placeholder:text-muted focus:outline-none focus:ring-0" placeholder="توضیحات" data-field="description"></textarea>
+              <div class="inline-flex w-fit flex-nowrap items-center rounded-md border border-border bg-surface p-0.5" data-region="priority-options" data-priority-group>
+                <button type="button" class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=high]:text-[var(--priority-high-text)] data-[selected=true]:bg-[var(--priority-high-bg)]" aria-pressed="false" data-action="select-priority" data-priority="high" data-selected="false">بالا</button>
+                <span class="px-1 text-border" aria-hidden="true">|</span>
+                <button type="button" class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=medium]:text-[var(--priority-medium-text)] data-[selected=true]:bg-[var(--priority-medium-bg)]" aria-pressed="false" data-action="select-priority" data-priority="medium" data-selected="false">متوسط</button>
+                <span class="px-1 text-border" aria-hidden="true">|</span>
+                <button type="button" class="inline-flex h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=low]:text-[var(--priority-low-text)] data-[selected=true]:bg-[var(--priority-low-bg)]" aria-pressed="false" data-action="select-priority" data-priority="low" data-selected="false">پایین</button>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 border-t border-border px-4 py-2 sm:px-5">
+              <button id="edit-task-cancel" type="button" class="flex h-8 w-8 items-center justify-center rounded-md text-icon hover:bg-background" aria-label="بستن ویرایش تسک" data-action="close-edit-task"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+              <button id="edit-task-submit" type="submit" class="rounded-lg bg-btn-primary px-4 py-2 text-xs font-semibold text-on-primary" data-action="update-task">ویرایش تسک</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="completed-tasks" aria-labelledby="completed-tasks-title" data-region="completed-tasks" data-empty="false">
+          <div class="mb-4 text-right">
+            <h2 id="completed-tasks-title" class="text-base font-extrabold leading-none">تسک‌های انجام‌شده</h2>
+            <p class="mt-2 text-xs leading-none text-muted"><span id="completed-count" data-task-count="completed">۱</span> تسک انجام شده است.</p>
+          </div>
+          <div id="completed-task-list" class="space-y-4" data-task-list="completed">
+            <article class="group relative min-h-[66px] overflow-hidden rounded-xl border border-border bg-surface shadow-sm" data-task-card data-ui-preview="completed-card" data-task-id="preview-completed-task" data-done="true" data-priority="medium">
+              <span class="absolute right-0 top-1/2 h-10 w-1 -translate-y-1/2 rounded-l-lg bg-border group-data-[priority=high]:bg-[var(--priority-high)] group-data-[priority=medium]:bg-[var(--priority-medium)] group-data-[priority=low]:bg-[var(--priority-low)]" aria-hidden="true" data-priority-stripe></span>
+              <div class="flex min-h-[66px] items-center gap-3 px-4 py-3 sm:px-6">
+                <span class="relative inline-flex h-4 w-4 shrink-0">
+                  <input type="checkbox" checked class="peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded border border-checkbox-border bg-surface checked:border-checkbox-checked checked:bg-checkbox-checked focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="علامت‌گذاری تسک به‌عنوان انجام‌نشده" data-action="toggle-task-completion" data-done="true" />
+                  <svg class="pointer-events-none absolute inset-0 m-auto h-2 w-2 text-checkbox-check opacity-0 peer-checked:opacity-100" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 6 2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+                <div class="min-w-0 flex-1 text-right"><h3 class="truncate text-base font-semibold leading-none text-done-title line-through" data-field="title">نام تسک</h3></div>
+                <button type="button" class="flex h-6 w-6 shrink-0 items-center justify-center rounded text-task-menu" aria-label="عملیات تسک" data-action="open-task-menu"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="20" r="2" /></svg></button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <template id="task-card-template" data-task-card-template>
+          <article class="group relative min-h-[105px] overflow-hidden rounded-xl border border-border bg-surface shadow-sm" data-task-card data-done="false" data-priority="">
+            <span class="absolute right-0 top-1/2 h-[78px] w-1 -translate-y-1/2 rounded-l-lg bg-border group-data-[priority=high]:bg-[var(--priority-high)] group-data-[priority=medium]:bg-[var(--priority-medium)] group-data-[priority=low]:bg-[var(--priority-low)]" aria-hidden="true" data-priority-stripe></span>
+            <div class="flex min-h-[105px] items-start gap-3 px-4 py-4 sm:pl-6 sm:pr-5">
+              <span class="relative mt-1 inline-flex h-4 w-4 shrink-0">
+                <input type="checkbox" class="peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded border border-checkbox-border bg-surface checked:border-checkbox-checked checked:bg-checkbox-checked focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="علامت‌گذاری تسک به‌عنوان انجام‌شده" data-action="toggle-task-completion" data-done="false" />
+                <svg class="pointer-events-none absolute inset-0 m-auto h-2 w-2 text-checkbox-check opacity-0 peer-checked:opacity-100" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 6 2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </span>
+              <div class="min-w-0 flex-1 text-right">
+                <div class="flex flex-nowrap items-center gap-2"><h3 class="min-w-0 flex-1 truncate text-base font-bold leading-none text-task-title" data-field="title"></h3><span class="hidden h-[23px] shrink-0 items-center rounded px-2 text-sm font-semibold leading-none text-muted data-[priority=high]:text-[var(--priority-high-text)] data-[priority=medium]:text-[var(--priority-medium-text)] data-[priority=low]:text-[var(--priority-low-text)] data-[priority=high]:bg-[var(--priority-high-bg)] data-[priority=medium]:bg-[var(--priority-medium-bg)] data-[priority=low]:bg-[var(--priority-low-bg)]" data-priority-label data-priority=""></span></div>
+                <p class="mt-[14px] text-xs font-normal leading-[1] text-muted" data-field="description"></p>
+              </div>
+              <button type="button" class="flex h-6 w-6 shrink-0 items-center justify-center rounded text-task-menu" aria-label="عملیات تسک" aria-haspopup="menu" aria-expanded="false" data-action="open-task-menu"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="20" r="2" /></svg></button>
+            </div>
+            <div class="absolute bottom-3 left-4 top-auto flex translate-y-0 items-center rounded-md border border-actions-border bg-actions-bg p-0.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100" role="group" aria-label="عملیات تسک" data-region="task-actions">
+              <button type="button" class="flex h-6 w-6 items-center justify-center rounded text-icon hover:bg-background" aria-label="ویرایش تسک" data-action="open-edit-task"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7H6C4.9 7 4 7.9 4 9V18C4 19.1 4.9 20 6 20H15C16.1 20 17 19.1 17 18V17"/><path d="M16 5L19 8M20.385 6.585A2.1 2.1 0 0 0 17.415 3.615L9 12V15H12L20.385 6.585Z"/></svg></button>
+              <span class="h-5 border-l border-border" aria-hidden="true"></span>
+              <button type="button" class="flex h-6 w-6 items-center justify-center rounded text-icon hover:bg-background" aria-label="حذف تسک" aria-haspopup="dialog" aria-controls="delete-confirmation-dialog" data-action="open-delete-action"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7H20M5 7L6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19L19 7M9 7V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V7M10 12L14 16M14 12L10 16"/></svg></button>
+            </div>
+          </article>
+        </template>
+        <template id="completed-task-card-template" data-task-card-template data-card-state="completed">
+          <article class="group relative min-h-[66px] overflow-hidden rounded-xl border border-border bg-surface shadow-sm" data-task-card data-done="true" data-priority="">
+            <span class="absolute right-0 top-1/2 h-10 w-1 -translate-y-1/2 rounded-l-lg bg-border group-data-[priority=high]:bg-[var(--priority-high)] group-data-[priority=medium]:bg-[var(--priority-medium)] group-data-[priority=low]:bg-[var(--priority-low)]" aria-hidden="true" data-priority-stripe></span>
+            <div class="flex min-h-[66px] items-center gap-3 px-4 py-3 sm:px-6">
+              <span class="relative inline-flex h-4 w-4 shrink-0">
+                <input type="checkbox" checked class="peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded border border-checkbox-border bg-surface checked:border-checkbox-checked checked:bg-checkbox-checked focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="علامت‌گذاری تسک به‌عنوان انجام‌نشده" data-action="toggle-task-completion" data-done="true" />
+                <svg class="pointer-events-none absolute inset-0 m-auto h-2 w-2 text-checkbox-check opacity-0 peer-checked:opacity-100" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 6 2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </span>
+              <div class="min-w-0 flex-1 text-right"><h3 class="truncate text-base font-semibold leading-none text-done-title line-through" data-field="title"></h3></div>
+              <button type="button" class="flex h-6 w-6 shrink-0 items-center justify-center rounded text-task-menu" aria-label="عملیات تسک" data-action="open-task-menu"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="4" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="20" r="2" /></svg></button>
+            </div>
+          </article>
+        </template>
+      </div>
+    </main>
+
+    <!-- Logic handoff: keep hidden initially. On [data-action="open-delete-action"], retain the selected task ID, remove this element's hidden attribute and !hidden class, then show it. On cancel, re-add both; on confirm, delete the selected task, then re-add both. -->
+    <div
+      id="delete-confirmation-dialog"
+      class="!hidden fixed inset-0 z-50 grid place-items-center bg-neutral-950/40 p-4 backdrop-blur-[1px]"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="delete-confirmation-title"
+      aria-describedby="delete-confirmation-description"
+      data-component="delete-confirmation"
+      data-open="false"
+      hidden
+    >
+      <section class="w-full max-w-[420px] rounded-2xl border border-border bg-surface px-6 py-8 text-center shadow-xl sm:px-8" data-region="delete-confirmation-content">
+        <span class="mx-auto mb-5 grid h-20 w-20 place-items-center rounded-full bg-[var(--priority-high-bg)] text-error" aria-hidden="true">
+          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 7h16M10 11v6m4-6v6M5 7l1 13h12l1-13M9 7V4h6v3" />
+          </svg>
+        </span>
+        <h2 id="delete-confirmation-title" class="text-2xl font-extrabold leading-tight text-on-background" tabindex="-1">از حذف تسک مطمئنی؟</h2>
+        <p id="delete-confirmation-description" class="mt-3 text-base leading-relaxed text-muted">این تسک برای همیشه حذف خواهد شد.</p>
+        <div class="mt-8 grid grid-cols-2 gap-3" dir="ltr">
+          <button type="button" class="min-h-12 rounded-xl border border-border bg-surface px-4 text-base font-semibold text-on-background transition hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-accent" data-action="cancel-delete">لغو</button>
+          <button type="button" class="min-h-12 rounded-xl bg-error px-4 text-base font-semibold text-on-primary transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-error" data-action="confirm-delete">حذف</button>
+        </div>
+      </section>
+    </div>
+  </body>
 </html>
