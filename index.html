@@ -9,60 +9,70 @@
     <link rel="stylesheet" href="./tokens.css" />
     <script src="./vendor/tailwind.js"></script>
     <script>
-      const token = (name) =>
-        `color-mix(in srgb, var(--${name}) calc(<alpha-value> * 100%), transparent)`;
+        // رنگ توکن + پشتیبانی از شفافیت
+        const token = (name) =>
+            `color-mix(in srgb, var(--${name}) calc(<alpha-value> * 100%), transparent)`;
 
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: token("primary"),
-              "primary-hover": token("primary-hover"),
-              "on-primary": token("on-primary"),
-              accent: token("accent"),
-              "btn-primary": token("btn-primary"),
-              "btn-secondary": token("btn-secondary"),
-              "btn-secondary-hover": token("btn-secondary-hover"),
-              background: token("background"),
-              "on-background": token("on-background"),
-              surface: token("surface"),
-              border: token("border"),
-              muted: token("muted"),
-              "task-title": token("task-title"),
-              "task-menu": token("task-menu"),
-              "done-title": token("done-title"),
-              "actions-bg": token("actions-bg"),
-              "actions-border": token("actions-border"),
-              "dash-line": token("dash-line"),
-              "checkbox-border": token("checkbox-border"),
-              "checkbox-checked": token("checkbox-checked"),
-              "checkbox-check": token("checkbox-check"),
-              "empty-title": token("empty-title"),
-              "empty-text": token("empty-text"),
-              icon: token("icon"),
-              neutral: {
-                50: token("neutral-50"),
-                100: token("neutral-100"),
-                200: token("neutral-200"),
-                300: token("neutral-300"),
-                400: token("neutral-400"),
-                500: token("neutral-500"),
-                600: token("neutral-600"),
-                700: token("neutral-700"),
-                800: token("neutral-800"),
-                900: token("neutral-900"),
-                950: token("neutral-950"),
-              },
-              error: token("error"),
-              success: token("success"),
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: token("primary"),
+                        "primary-hover": token("primary-hover"),
+                        "on-primary": token("on-primary"),
+                        accent: token("accent"),
+                        "btn-primary": token("btn-primary"),
+                        background: token("background"),
+                        "on-background": token("on-background"),
+                        surface: token("surface"),
+                        border: token("border"),
+                        muted: token("muted"),
+                        error: token("error"),
+                        success: token("success"),
+                        "task-title": token("task-title"),
+                        "task-menu": token("task-menu"),
+                        "done-title": token("done-title"),
+                        "actions-bg": token("actions-bg"),
+                        "actions-border": token("actions-border"),
+                        "priority-high": token("priority-high"),
+                        "priority-medium": token("priority-medium"),
+                        "priority-low": token("priority-low"),
+                        "priority-high-text": token("priority-high-text"),
+                        "priority-medium-text": token("priority-medium-text"),
+                        "priority-low-text": token("priority-low-text"),
+                        "priority-high-bg": token("priority-high-bg"),
+                        "priority-medium-bg": token("priority-medium-bg"),
+                        "priority-low-bg": token("priority-low-bg"),
+                        "dash-line": token("dash-line"),
+                        "checkbox-border": token("checkbox-border"),
+                        "checkbox-checked": token("checkbox-checked"),
+                        "checkbox-check": token("checkbox-check"),
+                        "btn-secondary": token("btn-secondary"),
+                        "btn-secondary-hover": token("btn-secondary-hover"),
+                        icon: token("icon"),
+                        "empty-title": token("empty-title"),
+                        "empty-text": token("empty-text"),
+                        neutral: {
+                            50: token("neutral-50"),
+                            100: token("neutral-100"),
+                            200: token("neutral-200"),
+                            300: token("neutral-300"),
+                            400: token("neutral-400"),
+                            500: token("neutral-500"),
+                            600: token("neutral-600"),
+                            700: token("neutral-700"),
+                            800: token("neutral-800"),
+                            900: token("neutral-900"),
+                            950: token("neutral-950"),
+                        },
+                    },
+                    fontFamily: {
+                        sans: ["Yekan Bakh", "system-ui", "sans-serif"],
+                    },
+                },
             },
-            fontFamily: {
-              sans: ["Yekan Bakh", "system-ui", "sans-serif"],
-            },
-          },
-        },
-      };
+        };
     </script>
 
     <script src="./js/storage.js" defer></script>
