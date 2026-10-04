@@ -50,19 +50,20 @@
  <body>
     <header
       id="app-header"
-      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-64 lg:rounded-t-xl lg:border lg:border-b-0 lg:border-border lg:bg-surface"
+      class="fixed inset-x-0 top-0 z-30 bg-[#FEFEFE] text-on-background dark:bg-[#060C18] lg:right-6 lg:left-auto lg:top-6 lg:w-60 lg:rounded-t-2xl lg:border lg:border-b-0 lg:border-border lg:bg-surface lg:shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
       data-component="app-header"
       data-mobile="true"
+      style="--app-canvas: var(--neutral-100)"
     >
       <div
         id="mobile-app-bar"
-        class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
+        class="mx-4 mt-4 flex h-12 items-center justify-between rounded-xl border border-border bg-surface px-3 shadow-[0_1px_3px_rgba(16,24,40,0.06)] lg:hidden"
         data-region="mobile-app-bar"
       >
         <button
           id="sidebar-toggle"
           type="button"
-          class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-on-background transition hover:bg-primary-hover/10 focus:outline-none focus:ring-2 focus:ring-primary-hover"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-on-background transition-all duration-200 ease-out hover:bg-[#EEF7FF] hover:text-primary-hover active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-hover/30"
           aria-label="باز کردن منوی کناری"
           aria-controls="app-sidebar"
           aria-expanded="false"
@@ -81,33 +82,33 @@
             <path d="M5 7h14M5 12h14M5 17h14" />
           </svg>
         </button>
-        <h1 id="app-title" class="text-sm font-bold">کوئرا لیست</h1>
+        <h1 id="app-title" class="text-[13px] font-extrabold tracking-[-0.01em]">کوئرا لیست</h1>
         <span class="w-6" aria-hidden="true"></span>
       </div>
 
       <div
         id="user-summary"
-        class="flex min-h-24 items-center gap-3 border-b border-border px-5 py-4 lg:min-h-28 lg:border-b-0"
+        class="mx-4 flex min-h-24 items-center gap-3 rounded-xl bg-surface px-4 py-4 lg:mx-0 lg:min-h-28 lg:rounded-none lg:border-b-0 lg:px-5"
         data-region="user-summary"
       >
         <img
           id="user-avatar"
           src="./assets/img/user-avatar.png"
           alt="تصویر پروفایل رویا"
-          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover"
+          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover object-center ring-1 ring-white/70"
           data-avatar="image"
         />
 
         <div class="min-w-0 flex-1">
           <p
             id="user-greeting"
-            class="truncate text-sm font-bold"
+            class="truncate text-[14px] font-extrabold leading-6"
             data-user-name="رویا"
           >
             سلام، رویا</p>
           <p
             id="today-label"
-            class="mt-1 truncate text-xs text-muted"
+            class="mt-0.5 truncate text-[11px] leading-5 text-muted"
             data-date-source="js"
           >
             امروز چهارشنبه، ۸ مهر ۱۴۰۵
@@ -118,11 +119,12 @@
 
     <aside
       id="app-sidebar"
-      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-200 data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-64 lg:translate-x-0 lg:rounded-b-xl lg:border lg:border-t-0 lg:shadow-none"
+      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-300 ease-out data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-60 lg:translate-x-0 lg:rounded-b-2xl lg:border lg:border-t-0 lg:shadow-[0_8px_24px_rgba(16,24,40,0.04)]"
       aria-label="منوی اصلی"
       data-component="sidebar"
       data-open="false"
       data-mode="responsive"
+      style="background-color: var(--surface)"
     >
       <div
         id="sidebar-mobile-head"
@@ -132,7 +134,7 @@
         <button
           id="sidebar-close"
           type="button"
-          class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-on-background transition hover:bg-primary-hover/10 focus:outline-none focus:ring-2 focus:ring-primary-hover"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-on-background transition-all duration-200 ease-out hover:bg-[#EEF7FF] hover:text-primary-hover active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-hover/30"
           aria-label="بستن منوی کناری"
           data-action="close-sidebar"
         >
@@ -154,14 +156,14 @@
 
       <nav
         id="primary-nav"
-        class="px-3 pt-4"
+        class="px-3 pt-4 lg:px-3.5 lg:pt-3"
         aria-label="ناوبری اصلی"
         data-region="primary-nav"
       >
         <a
           id="nav-home"
           href="#"
-          class="flex h-11 items-center gap-3 rounded-lg bg-primary-hover/10 px-3 text-sm font-semibold text-primary-hover"
+          class="group flex h-10 items-center gap-3 rounded-lg bg-[#EEF7FF] px-3 text-[13px] font-bold text-[#075CD9] shadow-[inset_0_0_0_1px_rgba(7,92,217,0.02)] transition-all duration-300 ease-out hover:bg-[#E4F1FF] hover:shadow-sm active:scale-[0.98] focus:bg-[#DCEEFF] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/15"
           aria-current="page"
           data-nav="home"
           data-active="true"
@@ -186,12 +188,12 @@
         <a
           id="nav-tasks"
           href="#"
-          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
           data-nav="tasks"
           data-active="false"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -209,12 +211,12 @@
         <a
           id="nav-calendar"
           href="#"
-          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
           data-nav="calendar"
           data-active="false"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -232,12 +234,12 @@
         <a
           id="nav-reports"
           href="#"
-          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
           data-nav="reports"
           data-active="false"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -255,12 +257,12 @@
         <a
           id="nav-settings"
           href="#"
-          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
           data-nav="settings"
           data-active="false"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -280,12 +282,12 @@
         <a
           id="nav-support"
           href="#"
-          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
           data-nav="support"
           data-active="false"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -305,13 +307,12 @@
         <a
           id="nav-profile"
           href="#"
-          class="mt-1 flex h-11 items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
           data-nav="profile"
           data-active="false"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
-            gg
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -329,22 +330,24 @@
 
       <div
         id="sidebar-footer"
-        class="mt-auto px-3 pb-4"
+        class="mt-auto px-3 pb-4 lg:px-3.5 lg:pb-4"
         data-region="sidebar-footer"
       >
         <div
           id="theme-switcher"
-          class="mb-3 flex items-center gap-1 rounded-lg border border-border bg-background p-1"
+          class="mb-0 flex h-10 items-center gap-1 rounded-lg bg-[#F5F6F8] p-1 dark:bg-[#101827]"
           data-region="theme-switcher"
           data-theme-control="true"
         >
           <button
             id="theme-light"
             type="button"
-            class="flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm text-on-background transition hover:bg-primary-hover/10"
+            class="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-md bg-white text-[12px] font-semibold text-[#191C1E] shadow-sm transition-all duration-200 hover:-translate-y-px dark:bg-transparent dark:text-[#848890] dark:shadow-none"
             data-action="set-theme"
             data-theme="light"
             aria-label="حالت روشن"
+            aria-pressed="true"
+            onclick="document.documentElement.classList.remove('dark');localStorage.setItem('theme','light');this.setAttribute('aria-pressed','true');document.getElementById('theme-dark').setAttribute('aria-pressed','false')"
           >
             <svg
               class="h-4 w-4"
@@ -365,10 +368,12 @@
           <button
             id="theme-dark"
             type="button"
-            class="flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm text-muted transition hover:bg-primary-hover/10"
+            class="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-md text-[12px] font-semibold text-[#727272] transition-all duration-200 hover:-translate-y-px dark:bg-[#1B2433] dark:text-white dark:shadow-sm"
             data-action="set-theme"
             data-theme="dark"
             aria-label="حالت تاریک"
+            aria-pressed="false"
+            onclick="document.documentElement.classList.add('dark');localStorage.setItem('theme','dark');this.setAttribute('aria-pressed','true');document.getElementById('theme-light').setAttribute('aria-pressed','false')"
           >
             <svg
               class="h-4 w-4"
@@ -385,14 +390,15 @@
             <span>تاریک</span>
           </button>
         </div>
+        <div class="my-3 h-px w-full bg-border" aria-hidden="true"></div>
         <button
           id="logout-button"
           type="button"
-          class="flex h-11 w-full items-center gap-3 rounded-lg px-3 text-sm text-on-background transition hover:bg-primary-hover/10"
+          class="group flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-200 hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] dark:hover:bg-white/5"
           data-action="logout"
         >
           <svg
-            class="h-5 w-5 shrink-0 text-muted"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -404,7 +410,7 @@
             <path
               d="M14 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3"
             />
-            <path d="M10 12h11M18 9l3 3-3 3" />
+            <path d="M21 12H10M13 9l-3 3 3 3" />
           </svg>
           <span>خروج</span>
         </button>
