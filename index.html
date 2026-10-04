@@ -585,9 +585,10 @@
       </div>
     </main>
 
+    <!-- Logic handoff: keep the dialog hidden on initial page load. When [data-action="open-delete-action"] is clicked, show it and retain the selected task ID. On [data-action="cancel-delete"], hide it; on [data-action="confirm-delete"], run the delete flow, then hide it. -->
     <div
       id="delete-confirmation-dialog"
-      class="fixed inset-0 z-50 grid place-items-center bg-neutral-950/40 p-4 backdrop-blur-[1px]"
+      class="!hidden fixed inset-0 z-50 grid place-items-center bg-neutral-950/40 p-4 backdrop-blur-[1px]"
       role="alertdialog"
       aria-modal="true"
       aria-labelledby="delete-confirmation-title"
