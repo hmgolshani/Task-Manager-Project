@@ -1,9 +1,12 @@
 let editingTaskId = null;
 let deletingTaskId = null;
 
-let editTitleInput = document.querySelector("#edit-task-title")
-let editDescriptionInput = document.querySelector("#edit-task-description")
+const editTitleInput = document.querySelector("#edit-task-title");
+const editDescriptionInput = document.querySelector("#edit-task-description");
 
+function getTaskById(taskId) {
+    return tasks.find((task) => task.id === taskId);
+}
 
 // get task ID
 function getTaskId(element) {
@@ -11,29 +14,6 @@ function getTaskId(element) {
     if (!card) return null;
 
     return Number(card.dataset.taskId);
-}
-
-//toggle checkbox
-document.addEventListener("change", (e) => {
-    const taskCompletion = e.target.matches('[data-action="toggle-task-completion"]'); //true & false
-
-    if (!taskCompletion) return;
-
-    const taskId = getTaskId(e.target);
-    if (!taskId) return;
-
-    toggleTaskCompletion(taskId);
-});
-
-function toggleTaskCompletion(taskId) {
-    const task = getTaskById(taskId);
-    if (!task) return;
-
-    task.completed = !task.completed;
-
-    saveTasks(tasks);
-    renderTasks();
-
 }
 
 
@@ -64,7 +44,7 @@ document.addEventListener("click", (e) => {
     if (!taskId) return;
 
     openEditTask(taskId);
-})
+});
 
 //edit
 function openEditTask(taskId) {
@@ -127,9 +107,10 @@ function updateTask(taskId) {
     task.description = newDescription;
     task.priority = newPriority;
 
-    saveTasks(tasks);
+    saveCurrentTasks();
     renderTasks();
     closeEditTask();
+
 }
 
 //close
@@ -140,7 +121,7 @@ document.addEventListener("click", (e) => {
 
     closeEditTask();
 
-})
+});
 
 function closeEditTask() {
     document.querySelector("#edit-task-region").hidden = true;
@@ -157,7 +138,7 @@ document.addEventListener("click", (e) => {
     if (!taskId) return;
     openDeleteAction(taskId);
 
-})
+});
 
 function openDeleteAction(taskId) {
     deletingTaskId = taskId;
@@ -185,7 +166,7 @@ function confirmDeleteTask() {
 
     tasks = tasks.filter(task => task.id !== deletingTaskId);
 
-    saveTasks(tasks);
+    saveCurrentTasks();
     renderTasks();
 
     cancelDeleteTask();
