@@ -15,7 +15,6 @@ function updateTaskCount() {
   }
   document.getElementById("task-count").textContent = tasks.length - done;
   document.getElementById("completed-count").textContent = done;
-  document.getElementById("total-task-count").textContent = tasks.length;
   document.getElementById("completed-tasks").dataset.empty = String(done === 0);
   let empty = document.getElementById("task-empty-state");
   empty.hidden = tasks.length !== 0;
@@ -88,18 +87,6 @@ function renderTasks() {
 function startTaskApp() {
   // 1. Create header UI elements required by other functions
   let heading = document.getElementById("task-page-heading");
-
-  let total = document.createElement("p");
-  total.className = "mt-2 text-xs text-muted";
-  total.textContent = "تعداد کل تسک‌ها: ";
-
-  let count = document.createElement("span");
-  count.id = "total-task-count";
-  total.appendChild(count);
-
-  let pendingTextParagraph = document.getElementById("task-count").parentNode;
-  heading.insertBefore(total, pendingTextParagraph);
-
   let message = document.createElement("p");
   message.id = "task-message";
   message.className = "mt-3 text-xs text-muted";
