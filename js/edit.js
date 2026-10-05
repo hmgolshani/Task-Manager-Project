@@ -1,8 +1,8 @@
 let editingTaskId = null;
 let deletingTaskId = null;
 
-let title = document.querySelector("#edit-task-title")
-let description = document.querySelector("#edit-task-description")
+let editTitleInput = document.querySelector("#edit-task-title")
+let editDescriptionInput = document.querySelector("#edit-task-description")
 
 
 // get task ID
@@ -13,14 +13,14 @@ function getTaskId(element) {
     return Number(card.dataset.taskId);
 }
 
-//toggle
+//toggle checkbox
 document.addEventListener("change", (e) => {
     const taskCompletion = e.target.matches('[data-action="toggle-task-completion"]'); //true & false
 
     if (!taskCompletion) return;
 
     const taskId = getTaskId(e.target);
-    if (taskId === null) return;
+    if (!taskId) return;
 
     toggleTaskCompletion(taskId);
 });
@@ -37,23 +37,19 @@ function toggleTaskCompletion(taskId) {
 }
 
 
-//open delete & edit menu
-
+// open delete & edit menu
 document.addEventListener("click", (e) => {
     const menuButton = e.target.closest('[data-action="open-task-menu"]');
-    if (!menuButton) return
+    if (!menuButton) return;
 
-    const taskId = getTaskId(menuButton);
-    if (taskId === null) return;
-
-    toggleTaskMenu(taskId);
-})
-
-function toggleTaskMenu(taskId) {
-    const card = document.querySelector(`[data-task-id = "${taskId}"]`);
+    const card = menuButton.closest("[data-task-card]");
     if (!card) return;
 
-    const menu = card.querySelector('[data-region="task-actions"]')
+    toggleTaskMenu(card);
+});
+
+function toggleTaskMenu(card) {
+    const menu = card.querySelector('[data-region="task-actions"]');
     if (!menu) return;
 
     menu.classList.toggle("hidden");
@@ -65,7 +61,7 @@ document.addEventListener("click", (e) => {
     if (!editButton) return;
 
     const taskId = getTaskId(editButton);
-    if (taskId === null) return;
+    if (!taskId) return;
 
     openEditTask(taskId);
 })
@@ -77,11 +73,11 @@ function openEditTask(taskId) {
 
     editingTaskId = taskId;
 
-    title.value = task.title;
-    description.value = task.description || "";
+    editTitleInput.value = task.title;
+    editDescriptionInput.value = task.description || "";
+    selectEditPriority(task.priority);
 
     document.querySelector("#edit-task-region").hidden = false;
-    selectEditPriority(task.priority);
 }
 
 // select priority
@@ -120,8 +116,8 @@ function updateTask(taskId) {
     if (!task) return;
 
 
-    const newTitle = title.value;
-    const newDescription = description.value;
+    const newTitle = editTitleInput.value.trim();
+    const newDescription = editDescriptionInput.value.trim();
 
     const selectedPriority = document.querySelector('#edit-task-form [data-selected="true"]');
 
@@ -185,7 +181,7 @@ document.addEventListener("click", (e) => {
 });
 
 function confirmDeleteTask() {
-    if (deletingTaskId === null) return;
+    if (!deletingTaskId) return;
 
     tasks = tasks.filter(task => task.id !== deletingTaskId);
 
