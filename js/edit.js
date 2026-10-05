@@ -45,12 +45,22 @@ const editError = setupEditForm();
 // open delete & edit menu
 document.addEventListener("click", (e) => {
     const menuButton = e.target.closest('[data-action="open-task-menu"]');
-    if (!menuButton) return;
 
-    const card = menuButton.closest("[data-task-card]");
-    if (!card) return;
+    if (menuButton) {
+        const card = menuButton.closest("[data-task-card]");
+        if (!card) return;
 
-    toggleTaskMenu(card);
+        toggleTaskMenu(card);
+        return;
+    }
+
+    const menus = document.querySelectorAll(
+        '[data-region="task-actions"]'
+    );
+
+    menus.forEach((menu) => {
+        menu.classList.add("hidden");
+    });
 });
 
 function toggleTaskMenu(card) {
