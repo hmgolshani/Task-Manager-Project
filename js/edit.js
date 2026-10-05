@@ -4,6 +4,8 @@ let deletingTaskId = null;
 const editTitleInput = document.querySelector("#edit-task-title");
 const editDescriptionInput = document.querySelector("#edit-task-description");
 
+const editRegion = document.querySelector("#edit-task-region");
+
 function getTaskById(taskId) {
     return tasks.find((task) => task.id === taskId);
 }
@@ -41,13 +43,16 @@ document.addEventListener("click", (e) => {
     if (!editButton) return;
 
     const taskId = getTaskId(editButton);
-    if (!taskId) return;
+    if (taskId === null) return;
 
-    openEditTask(taskId);
+    const card = editButton.closest("[data-task-card]");
+    if (!card) return;
+
+    openEditTask(taskId, card);
 });
 
 //edit
-function openEditTask(taskId) {
+function openEditTask(taskId, card) {
     const task = getTaskById(taskId);
     if (!task) return;
 
@@ -55,9 +60,12 @@ function openEditTask(taskId) {
 
     editTitleInput.value = task.title;
     editDescriptionInput.value = task.description || "";
+
     selectEditPriority(task.priority);
 
-    document.querySelector("#edit-task-region").hidden = false;
+    card.after(editRegion);
+
+    editRegion.hidden = false;
 }
 
 // select priority
@@ -124,7 +132,7 @@ document.addEventListener("click", (e) => {
 });
 
 function closeEditTask() {
-    document.querySelector("#edit-task-region").hidden = true;
+    editRegion.hidden = true;
     editingTaskId = null;
 }
 
