@@ -20,7 +20,28 @@ function getTaskId(element) {
     return Number(card.dataset.taskId);
 }
 
+function setupEditForm() {
+    const editForm = document.querySelector("#edit-task-form");
 
+    editForm.noValidate = true;
+
+    const editError = document.createElement("p");
+    editError.id = "edit-task-error";
+    editError.className = "px-4 py-2 text-xs text-error";
+    editError.setAttribute("role", "alert");
+
+    editForm.insertBefore(editError, editForm.lastElementChild);
+
+    editTitleInput.setAttribute("aria-describedby", editError.id);
+
+    editForm.addEventListener("input", () => {
+        editError.textContent = "";
+    });
+
+    return editError;
+}
+
+const editError = setupEditForm();
 // open delete & edit menu
 document.addEventListener("click", (e) => {
     const menuButton = e.target.closest('[data-action="open-task-menu"]');
@@ -61,6 +82,7 @@ function openEditTask(taskId, card) {
     editingTaskId = taskId;
 
     editTitleInput.value = task.title;
+
     editDescriptionInput.value = task.description || "";
 
     selectEditPriority(task.priority);
@@ -107,7 +129,11 @@ function updateTask(taskId) {
 
 
     const newTitle = editTitleInput.value.trim();
-    if (newTitle === "") return;
+    if (newTitle === "") {
+        editError.textContent = "لطفاً نام تسک را وارد کن.";
+        editTitleInput.focus();
+        return;
+    }
 
     const newDescription = editDescriptionInput.value.trim();
 
