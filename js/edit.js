@@ -4,8 +4,10 @@ let deletingTaskId = null;
 const editTitleInput = document.querySelector("#edit-task-title");
 const editDescriptionInput = document.querySelector("#edit-task-description");
 
+// get the edit task form container
 const editRegion = document.querySelector("#edit-task-region");
 
+// find a task by ID
 function getTaskById(taskId) {
     return tasks.find((task) => task.id === taskId);
 }
@@ -105,6 +107,8 @@ function updateTask(taskId) {
 
 
     const newTitle = editTitleInput.value.trim();
+    if (newTitle === "") return;
+
     const newDescription = editDescriptionInput.value.trim();
 
     const selectedPriority = document.querySelector('#edit-task-form [data-selected="true"]');
@@ -148,6 +152,7 @@ document.addEventListener("click", (e) => {
 
 });
 
+
 function openDeleteAction(taskId) {
     deletingTaskId = taskId;
 
@@ -179,6 +184,7 @@ function confirmDeleteTask() {
 
     cancelDeleteTask();
 }
+
 
 function cancelDeleteTask() {
     const dialog = document.querySelector("#delete-confirmation-dialog");
