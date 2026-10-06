@@ -13,13 +13,20 @@ function updateTaskCount() {
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].completed === true) done = done + 1;
   }
-  document.getElementById("task-count").textContent = tasks.length - done;
+  let pending = tasks.length - done;
+
+  document.getElementById("task-count").textContent = pending;
   document.getElementById("completed-count").textContent = done;
   document.getElementById("completed-tasks").dataset.empty = String(done === 0);
+
   let empty = document.getElementById("task-empty-state");
-  empty.hidden = tasks.length !== 0;
-  empty.style.display = tasks.length === 0 ? "" : "none";
-  empty.dataset.visible = String(tasks.length === 0);
+  if (empty) {
+    let hasNoPendingTasks = pending === 0;
+
+    empty.hidden = !hasNoPendingTasks;
+    empty.style.display = hasNoPendingTasks ? "" : "none";
+    empty.dataset.visible = String(hasNoPendingTasks);
+  }
 }
 
 //creating card template
