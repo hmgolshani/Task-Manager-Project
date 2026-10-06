@@ -84,7 +84,7 @@
   <body class="min-h-screen bg-background font-sans text-on-background antialiased">
     <header
       id="app-header"
-      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-60 lg:rounded-t-2xl lg:border lg:border-b-0 lg:border-border lg:bg-surface lg:shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
+      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:hidden"
       data-component="app-header"
       data-mobile="true"
       style="--app-canvas: var(--neutral-100)"
@@ -120,40 +120,11 @@
         <span class="w-6" aria-hidden="true"></span>
       </div>
 
-      <div
-        id="user-summary"
-        class="mx-4 flex min-h-24 items-center gap-3 rounded-xl bg-surface px-4 py-4 lg:mx-0 lg:min-h-28 lg:rounded-none lg:border-b-0 lg:px-5"
-        data-region="user-summary"
-      >
-        <img
-          id="user-avatar"
-          src="./assets/img/user-avatar.png"
-          alt="تصویر پروفایل رویا"
-          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover object-center ring-1 ring-border"
-          data-avatar="image"
-        />
-
-        <div class="min-w-0 flex-1">
-          <p
-            id="user-greeting"
-            class="truncate text-[14px] font-extrabold leading-6"
-            data-user-name="رویا"
-          >
-            سلام، رویا</p>
-          <p
-            id="today-label"
-            class="mt-0.5 truncate text-[11px] leading-5 text-muted"
-            data-date-source="js"
-          >
-            امروز چهارشنبه، ۸ مهر ۱۴۰۵
-          </p>
-        </div>
-      </div>
     </header>
 
     <aside
       id="app-sidebar"
-      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-300 ease-out data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-60 lg:translate-x-0 lg:rounded-b-2xl lg:border lg:border-t-0 lg:shadow-[0_8px_24px_rgba(16,24,40,0.04)]"
+      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-300 ease-out data-[open=true]:translate-x-0 lg:right-6 lg:top-6 lg:bottom-6 lg:z-20 lg:w-60 lg:translate-x-0 lg:rounded-2xl lg:border lg:shadow-[0_8px_24px_rgba(16,24,40,0.04)]"
       aria-label="منوی اصلی"
       data-component="sidebar"
       data-open="false"
@@ -188,6 +159,36 @@
         <span class="w-9" aria-hidden="true"></span>
       </div>
 
+      <div
+        id="user-summary"
+        class="mx-3 mt-3 flex min-h-24 items-center gap-3 rounded-xl px-4 py-4 lg:mx-3 lg:mt-3 lg:min-h-24"
+        data-region="user-summary"
+      >
+        <img
+          id="user-avatar"
+          src="./assets/img/user-avatar.png"
+          alt="تصویر پروفایل رویا"
+          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover object-center ring-1 ring-border"
+          data-avatar="image"
+        />
+
+        <div class="min-w-0 flex-1">
+          <p
+            id="user-greeting"
+            class="truncate text-[14px] font-extrabold leading-6"
+            data-user-name="رویا"
+          >
+            سلام، رویا</p>
+          <p
+            id="today-label"
+            class="mt-0.5 truncate text-[11px] leading-5 text-muted"
+            data-date-source="js"
+          >
+             چهارشنبه، ۱۵ مهر ۱۴۰۵
+          </p>
+        </div>
+      </div>
+
       <nav
         id="primary-nav"
         class="px-3 pt-4 lg:px-3.5 lg:pt-3"
@@ -197,10 +198,8 @@
         <a
           id="nav-home"
           href="#"
-          class="group flex h-10 items-center gap-3 rounded-lg bg-primary-hover/10 px-3 text-[13px] font-bold text-primary-hover shadow-[inset_0_0_0_1px_rgba(7,92,217,0.02)] transition-all duration-300 ease-out hover:bg-primary-hover/15 hover:shadow-sm active:scale-[0.98] focus:bg-primary-hover/20 focus:outline-none focus:ring-2 focus:ring-primary-hover/15"
-          aria-current="page"
-          data-nav="home"
-          data-active="true"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
+          data-active="false"
         >
           <svg
             class="h-5 w-5 shrink-0"
