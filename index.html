@@ -50,7 +50,7 @@
  <body>
     <header
       id="app-header"
-      class="fixed inset-x-0 top-0 z-30 bg-[#FEFEFE] text-on-background dark:bg-[#060C18] lg:right-6 lg:left-auto lg:top-6 lg:w-60 lg:rounded-t-2xl lg:border lg:border-b-0 lg:border-border lg:bg-surface lg:shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
+      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-60 lg:rounded-t-2xl lg:border lg:border-b-0 lg:border-border lg:bg-surface lg:shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
       data-component="app-header"
       data-mobile="true"
       style="--app-canvas: var(--neutral-100)"
@@ -63,7 +63,7 @@
         <button
           id="sidebar-toggle"
           type="button"
-          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-on-background transition-all duration-200 ease-out hover:bg-[#EEF7FF] hover:text-primary-hover active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-hover/30"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-on-background transition-all duration-200 ease-out hover:bg-primary-hover/10 hover:text-primary-hover active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-hover/30"
           aria-label="باز کردن منوی کناری"
           aria-controls="app-sidebar"
           aria-expanded="false"
@@ -95,7 +95,7 @@
           id="user-avatar"
           src="./assets/img/user-avatar.png"
           alt="تصویر پروفایل رویا"
-          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover object-center ring-1 ring-white/70"
+          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover object-center ring-1 ring-border"
           data-avatar="image"
         />
 
@@ -134,7 +134,7 @@
         <button
           id="sidebar-close"
           type="button"
-          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-on-background transition-all duration-200 ease-out hover:bg-[#EEF7FF] hover:text-primary-hover active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-hover/30"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-on-background transition-all duration-200 ease-out hover:bg-primary-hover/10 hover:text-primary-hover active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary-hover/30"
           aria-label="بستن منوی کناری"
           data-action="close-sidebar"
         >
@@ -163,7 +163,7 @@
         <a
           id="nav-home"
           href="#"
-          class="group flex h-10 items-center gap-3 rounded-lg bg-[#EEF7FF] px-3 text-[13px] font-bold text-[#075CD9] shadow-[inset_0_0_0_1px_rgba(7,92,217,0.02)] transition-all duration-300 ease-out hover:bg-[#E4F1FF] hover:shadow-sm active:scale-[0.98] focus:bg-[#DCEEFF] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/15"
+          class="group flex h-10 items-center gap-3 rounded-lg bg-primary-hover/10 px-3 text-[13px] font-bold text-primary-hover shadow-[inset_0_0_0_1px_rgba(7,92,217,0.02)] transition-all duration-300 ease-out hover:bg-primary-hover/15 hover:shadow-sm active:scale-[0.98] focus:bg-primary-hover/20 focus:outline-none focus:ring-2 focus:ring-primary-hover/15"
           aria-current="page"
           data-nav="home"
           data-active="true"
@@ -188,12 +188,12 @@
         <a
           id="nav-tasks"
           href="#"
-          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
           data-nav="tasks"
           data-active="false"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -211,12 +211,12 @@
         <a
           id="nav-calendar"
           href="#"
-          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
           data-nav="calendar"
           data-active="false"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -234,12 +234,12 @@
         <a
           id="nav-reports"
           href="#"
-          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
           data-nav="reports"
           data-active="false"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -257,12 +257,12 @@
         <a
           id="nav-settings"
           href="#"
-          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
           data-nav="settings"
           data-active="false"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -282,12 +282,12 @@
         <a
           id="nav-support"
           href="#"
-          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
           data-nav="support"
           data-active="false"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -307,12 +307,12 @@
         <a
           id="nav-profile"
           href="#"
-          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] active:bg-[#E4F1FF] focus:bg-[#EEF7FF] focus:text-[#075CD9] focus:outline-none focus:ring-2 focus:ring-[#075CD9]/10 dark:hover:bg-white/5 dark:focus:bg-white/10"
+          class="group mt-1 flex h-10 items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-300 ease-out hover:translate-x-[-2px] hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] active:bg-primary-hover/15 focus:bg-primary-hover/10 focus:text-primary-hover focus:outline-none focus:ring-2 focus:ring-primary-hover/10 dark:hover:bg-primary-hover/10 dark:focus:bg-primary-hover/10"
           data-nav="profile"
           data-active="false"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -335,14 +335,14 @@
       >
         <div
           id="theme-switcher"
-          class="mb-0 flex h-10 items-center gap-1 rounded-lg bg-[#F5F6F8] p-1 dark:bg-[#101827]"
+          class="mb-0 flex h-10 items-center gap-1 rounded-lg bg-[var(--neutral-200)] p-1 dark:bg-background"
           data-region="theme-switcher"
           data-theme-control="true"
         >
           <button
             id="theme-light"
             type="button"
-            class="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-md bg-white text-[12px] font-semibold text-[#191C1E] shadow-sm transition-all duration-200 hover:-translate-y-px dark:bg-transparent dark:text-[#848890] dark:shadow-none"
+            class="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-md bg-white text-[12px] font-semibold text-on-background shadow-sm transition-all duration-200 hover:-translate-y-px dark:bg-transparent dark:text-muted dark:shadow-none"
             data-action="set-theme"
             data-theme="light"
             aria-label="حالت روشن"
@@ -368,7 +368,7 @@
           <button
             id="theme-dark"
             type="button"
-            class="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-md text-[12px] font-semibold text-[#727272] transition-all duration-200 hover:-translate-y-px dark:bg-[#1B2433] dark:text-white dark:shadow-sm"
+            class="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-md text-[12px] font-semibold text-muted transition-all duration-200 hover:-translate-y-px dark:bg-surface dark:text-on-background dark:shadow-sm"
             data-action="set-theme"
             data-theme="dark"
             aria-label="حالت تاریک"
@@ -394,11 +394,11 @@
         <button
           id="logout-button"
           type="button"
-          class="group flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-200 hover:bg-[#F5F6F8] hover:text-[#075CD9] active:scale-[0.98] dark:hover:bg-white/5"
+          class="group flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[13px] text-on-background transition-all duration-200 hover:bg-[var(--neutral-200)] hover:text-primary-hover active:scale-[0.98] dark:hover:bg-primary-hover/10"
           data-action="logout"
         >
           <svg
-            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-[#075CD9] group-focus:text-[#075CD9]"
+            class="h-[18px] w-[18px] shrink-0 text-muted transition-colors duration-300 group-hover:text-primary-hover group-focus:text-primary-hover"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
