@@ -1061,7 +1061,7 @@
               </button>
             </div>
             <div
-              class="absolute bottom-3 left-4 top-auto flex translate-y-0 items-center rounded-md border border-actions-border bg-actions-bg p-0.5 hidden"
+              class="absolute top-12 left-10 top-auto flex translate-y-0 items-center rounded-md border border-actions-border bg-actions-bg p-0.5 hidden"
               role="group"
               aria-label="عملیات تسک"
               data-region="task-actions"
@@ -1126,7 +1126,7 @@
           data-card-state="completed"
         >
           <article
-            class="group relative min-h-[66px] overflow-hidden rounded-xl border border-border bg-surface shadow-sm"
+            class="group relative min-h-[66px] overflow-hidden rounded-xl border border-border bg-surface shadow-sm has-[div[data-region='task-actions']:not(.hidden)]:pb-7 "
             data-task-card
             data-done="true"
             data-priority=""
@@ -1182,6 +1182,37 @@
                   <circle cx="12" cy="4" r="2" />
                   <circle cx="12" cy="12" r="2" />
                   <circle cx="12" cy="20" r="2" />
+                </svg>
+              </button>
+            </div>
+            <div
+                    class="absolute top-12 left-10 top-auto flex translate-y-0 items-center rounded-md border border-actions-border bg-actions-bg p-0.5 hidden"
+                    role="group"
+                    aria-label="عملیات تسک"
+                    data-region="task-actions"
+            >
+              
+              <button
+                      type="button"
+                      class="flex h-6 w-6 items-center justify-center rounded text-icon hover:bg-background"
+                      aria-label="حذف تسک"
+                      aria-haspopup="dialog"
+                      aria-controls="delete-confirmation-dialog"
+                      data-action="open-delete-action"
+              >
+                <svg
+                        class="h-6 w-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                >
+                  <path
+                          d="M4 7H20M5 7L6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19L19 7M9 7V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V7M10 12L14 16M14 12L10 16"
+                  />
                 </svg>
               </button>
             </div>
