@@ -585,7 +585,7 @@
       </div>
     </main>
 
-    <!-- Logic handoff: keep the dialog hidden on initial page load. When [data-action="open-delete-action"] is clicked, show it and retain the selected task ID. On [data-action="cancel-delete"], hide it; on [data-action="confirm-delete"], run the delete flow, then hide it. -->
+    <!-- Logic handoff: keep hidden initially. On [data-action="open-delete-action"], retain the selected task ID, remove this element's hidden attribute and !hidden class, then show it. On cancel, re-add both; on confirm, delete the selected task, then re-add both. -->
     <div
       id="delete-confirmation-dialog"
       class="!hidden fixed inset-0 z-50 grid place-items-center bg-neutral-950/40 p-4 backdrop-blur-[1px]"
