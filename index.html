@@ -86,14 +86,14 @@
   >
     <header
       id="app-header"
-      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-60 lg:rounded-t-2xl lg:overflow-hidden lg:border lg:border-b-0 lg:border-border lg:bg-surface lg:shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
+      class="fixed inset-x-0 top-0 z-30 bg-background text-on-background lg:right-6 lg:left-auto lg:top-6 lg:w-60 lg:rounded-t-2xl lg:overflow-hidden  lg:border-b-0  lg:bg-surface lg:shadow-[0_1px_3px_rgba(16,24,40,0.04)]"
       data-component="app-header"
       data-mobile="true"
       style="--app-canvas: var(--neutral-100)"
     >
       <div
         id="mobile-app-bar"
-        class="mx-4 mt-4 flex h-12 items-center justify-between rounded-xl border border-border bg-surface px-3 shadow-[0_1px_3px_rgba(16,24,40,0.06)] lg:hidden"
+        class="mx-4 mt-4 flex h-12 items-center justify-between rounded-xl bg-surface px-3 shadow-[0_1px_3px_rgba(16,24,40,0.06)] lg:hidden"
         data-region="mobile-app-bar"
       >
         <button
@@ -129,14 +129,14 @@
 
       <div
         id="user-summary"
-        class="mx-4 flex min-h-24 items-center gap-3 rounded-xl bg-surface px-4 py-4 lg:mx-0 lg:min-h-28 lg:rounded-none lg:border-b-0 lg:px-5"
+        class="mx-4 flex min-h-24 items-center gap-3 rounded-xl  px-4 py-4 lg:mx-0 lg:min-h-28 lg:rounded-none lg:border-b-0 lg:px-5"
         data-region="user-summary"
       >
         <img
           id="user-avatar"
           src="./assets/img/user-avatar.png"
           alt="تصویر پروفایل رویا"
-          class="h-11 w-11 shrink-0 rounded-full border border-border object-cover object-center ring-1 ring-border"
+          class="h-11 w-11 shrink-0 rounded-full  object-cover object-center "
           data-avatar="image"
         />
 
@@ -161,7 +161,7 @@
 
     <aside
       id="app-sidebar"
-      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col border-l border-border bg-surface text-on-background shadow-xl transition-transform duration-300 ease-out data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-60 lg:translate-x-0 lg:rounded-b-2xl lg:border lg:border-t-0 lg:shadow-[0_8px_24px_rgba(16,24,40,0.04)]"
+      class="fixed inset-y-0 right-0 z-40 flex w-72 translate-x-full flex-col  bg-surface text-on-background shadow-xl transition-transform duration-300 ease-out data-[open=true]:translate-x-0 lg:right-6 lg:top-[8.5rem] lg:bottom-6 lg:z-20 lg:w-60 lg:translate-x-0 lg:rounded-b-2xl lg:border-t-0 lg:shadow-[0_8px_24px_rgba(16,24,40,0.04)]"
       aria-label="منوی اصلی"
       data-component="sidebar"
       data-open="false"
@@ -170,7 +170,7 @@
     >
       <div
         id="sidebar-mobile-head"
-        class="flex h-14 items-center justify-between border-b border-border px-4 lg:hidden"
+        class="flex h-14 items-center justify-between  px-4 lg:hidden"
         data-region="sidebar-mobile-head"
       >
         <button
