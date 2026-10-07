@@ -106,7 +106,7 @@ function openEditTask(taskId, card) {
 
     editRegion.hidden = false;
     
-    card.hidden = true;
+    // card.hidden = true;
     
     checkEditChanges();
 }
@@ -205,7 +205,7 @@ document.addEventListener("click", (e) => {
 function closeEditTask() {
     editRegion.hidden = true;
     
-    if (editingCard) editingCard.hidden = false;
+    // if (editingCard) editingCard.hidden = false;
     
     editingTaskId = null;
     editingCard = null;
