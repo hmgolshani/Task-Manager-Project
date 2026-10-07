@@ -1,11 +1,14 @@
 let editingTaskId = null;
 let deletingTaskId = null;
+let editingCard = null ;
 
 const editTitleInput = document.querySelector("#edit-task-title");
 const editDescriptionInput = document.querySelector("#edit-task-description");
 
 // get the edit task form container
 const editRegion = document.querySelector("#edit-task-region");
+const editSubmitButton = document.querySelector("#edit-task-submit");
+
 
 // find a task by ID
 function getTaskById(taskId) {
@@ -36,6 +39,7 @@ function setupEditForm() {
 
     editForm.addEventListener("input", () => {
         editError.textContent = "";
+        checkEditChanges();
     });
 
     return editError;
@@ -90,6 +94,7 @@ function openEditTask(taskId, card) {
     if (!task) return;
 
     editingTaskId = taskId;
+    editingCard = card;
 
     editTitleInput.value = task.title;
 
@@ -100,6 +105,10 @@ function openEditTask(taskId, card) {
     card.after(editRegion);
 
     editRegion.hidden = false;
+    
+    card.hidden = true;
+    
+    checkEditChanges();
 }
 
 // select priority
@@ -125,6 +134,7 @@ document.addEventListener("click", (e) => {
     if (!priorityButton) return;
 
     selectEditPriority(priorityButton.dataset.priority);
+    checkEditChanges();
 });
 
 //update
@@ -161,6 +171,27 @@ function updateTask(taskId) {
 
 }
 
+function checkEditChanges() {
+    const task = getTaskById(editingTaskId); 
+    if (!task) return;
+    
+    const newTitle = editTitleInput.value.trim();
+    const newDescription = editDescriptionInput.value.trim();
+
+    const selectedPriority = document.querySelector(
+        '#edit-task-form [data-selected="true"]'
+    );
+
+    const newPriority = selectedPriority?.dataset.priority;
+
+    const hasChanges =
+        newTitle !== task.title ||
+        newDescription !== (task.description || "") ||
+        newPriority !== task.priority;
+
+    editSubmitButton.disabled = !hasChanges;
+}
+
 //close
 
 document.addEventListener("click", (e) => {
@@ -173,7 +204,12 @@ document.addEventListener("click", (e) => {
 
 function closeEditTask() {
     editRegion.hidden = true;
+    
+    if (editingCard) editingCard.hidden = false;
+    
     editingTaskId = null;
+    editingCard = null;
+    
 }
 
 
