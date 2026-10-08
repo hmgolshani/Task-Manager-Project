@@ -268,3 +268,7 @@ function cancelDeleteTask() {
 
     deletingTaskId = null;
 }
+
+document.querySelector("#create-task-toggle").addEventListener("click", () => {
+    document.querySelector("#create-task-form details").open = false;
+});
