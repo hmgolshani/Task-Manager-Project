@@ -101,6 +101,7 @@ function openEditTask(taskId, card) {
     editDescriptionInput.value = task.description || "";
 
     selectEditPriority(task.priority);
+    editRegion.querySelector("details").open = false;
 
     card.after(editRegion);
 
@@ -135,13 +136,6 @@ document.addEventListener("click", (e) => {
 
     selectEditPriority(priorityButton.dataset.priority);
     checkEditChanges();
-});
-
-document.addEventListener("click", (e) => {
-    const priorityButton = e.target.closest('details [data-action="select-priority"]');
-    if (!priorityButton) return;
-
-    priorityButton.closest("details").open = false;
 });
 
 //update
