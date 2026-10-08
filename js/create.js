@@ -37,10 +37,16 @@ function toggleCreateTaskDropdown() {
   let form = document.getElementById("create-task-form");
   let button = document.getElementById("create-task-toggle");
   let open = form.hidden;
+
   form.hidden = !open;
+  button.hidden = open;
+
+  button.style.display = open ? "none" : "";
+
   form.dataset.open = String(open);
   button.dataset.open = String(open);
   button.setAttribute("aria-expanded", String(open));
+
   if (open) {
     document.getElementById("task-title").focus();
   } else {
