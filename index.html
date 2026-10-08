@@ -548,6 +548,14 @@
                 placeholder="توضیحات"
                 data-field="description"
               ></textarea>
+              <details class="group/tags">
+                <summary class="inline-flex w-fit cursor-pointer list-none group-open/tags:mb-4 [&::-webkit-details-marker]:hidden">
+                  <span class="inline-flex h-8 items-center gap-1.5 rounded-md border border-muted px-2.5 text-xs font-semibold leading-none text-on-background">
+                    <svg class="h-5 w-5 text-icon group-open/tags:hidden" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" aria-hidden="true"><path d="M1.66 10 6 2.58h10.66a1.68 1.68 0 0 1 1.68 1.68v11.48a1.68 1.68 0 0 1-1.68 1.68H6L1.66 10Z" /></svg>
+                    <svg class="hidden h-5 w-5 group-open/tags:block" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v12.2a1 1 0 0 1-.4.8L12 22l-6.6-5a1 1 0 0 1-.4-.8V4a1 1 0 0 1 1-1Z" /></svg>
+                    تگ‌ها
+                  </span>
+                </summary>
               <div
                 class="inline-flex w-fit flex-nowrap items-center rounded-md border border-border bg-surface p-0.5"
                 data-region="priority-options"
@@ -589,6 +597,7 @@
                   پایین
                 </button>
               </div>
+              </details>
             </div>
             <div
               class="flex items-center justify-end gap-2 border-t border-border px-4 py-2 sm:px-5"
@@ -846,6 +855,25 @@
                 placeholder="توضیحات"
                 data-field="description"
               ></textarea>
+              <details class="group/tags">
+                <summary class="inline-flex w-fit cursor-pointer list-none group-open/tags:mb-4 [&::-webkit-details-marker]:hidden">
+                  <span class="hidden h-8 items-center gap-2 rounded-md px-2.5 text-xs font-semibold leading-none bg-priority-high-bg text-priority-high-text group-has-[[data-priority=high][data-selected=true]]/tags:inline-flex group-open/tags:!hidden">
+                    <svg class="h-3.5 w-3.5 text-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+                    بالا
+                  </span>
+                  <span class="hidden h-8 items-center gap-2 rounded-md px-2.5 text-xs font-semibold leading-none bg-priority-medium-bg text-priority-medium-text group-has-[[data-priority=medium][data-selected=true]]/tags:inline-flex group-open/tags:!hidden">
+                    <svg class="h-3.5 w-3.5 text-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+                    متوسط
+                  </span>
+                  <span class="hidden h-8 items-center gap-2 rounded-md px-2.5 text-xs font-semibold leading-none bg-priority-low-bg text-priority-low-text group-has-[[data-priority=low][data-selected=true]]/tags:inline-flex group-open/tags:!hidden">
+                    <svg class="h-3.5 w-3.5 text-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+                    پایین
+                  </span>
+                  <span class="hidden h-8 items-center gap-1.5 rounded-md border border-muted px-2.5 text-xs font-semibold leading-none text-on-background group-open/tags:inline-flex">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v12.2a1 1 0 0 1-.4.8L12 22l-6.6-5a1 1 0 0 1-.4-.8V4a1 1 0 0 1 1-1Z" /></svg>
+                    تگ‌ها
+                  </span>
+                </summary>
               <div
                 class="inline-flex w-fit flex-nowrap items-center rounded-md border border-border bg-surface p-0.5"
                 data-region="priority-options"
@@ -884,6 +912,7 @@
                   پایین
                 </button>
               </div>
+              </details>
             </div>
             <div class="flex items-center justify-end gap-2 border-t border-border px-4 py-2 sm:px-5">
               <button id="edit-task-cancel" type="button" class="flex h-8 w-8 items-center justify-center rounded-md border border-actions-border bg-actions-bg text-icon transition hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="بستن ویرایش تسک" data-action="close-edit-task"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>

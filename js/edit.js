@@ -101,6 +101,7 @@ function openEditTask(taskId, card) {
     editDescriptionInput.value = task.description || "";
 
     selectEditPriority(task.priority);
+    editRegion.querySelector("details").open = false;
 
     card.after(editRegion);
 
@@ -267,3 +268,7 @@ function cancelDeleteTask() {
 
     deletingTaskId = null;
 }
+
+document.querySelector("#create-task-toggle").addEventListener("click", () => {
+    document.querySelector("#create-task-form details").open = false;
+});
