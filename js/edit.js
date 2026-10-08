@@ -137,6 +137,13 @@ document.addEventListener("click", (e) => {
     checkEditChanges();
 });
 
+document.addEventListener("click", (e) => {
+    const priorityButton = e.target.closest('details [data-action="select-priority"]');
+    if (!priorityButton) return;
+
+    priorityButton.closest("details").open = false;
+});
+
 //update
 document.querySelector("#edit-task-form").addEventListener("submit", (e) => {
     e.preventDefault();
